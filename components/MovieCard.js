@@ -1,17 +1,21 @@
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, Pressable } from 'react-native'
 import React from 'react'
 
 const { width, height } = Dimensions.get('screen');
+const imageBaseUrl = 'https://image.tmdb.org/t/p/w300';
 
-const MovieCard = ({ movieDetails }) => {
+const MovieCard = ({ movieDetails, navigation }) => {
+    // console.log('details of the movie: ', movieDetails);
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={() => navigation.push('MovieDetails', {
+        itemId: movieDetails.id
+    })}>
         <Image 
-            source={{uri: movieDetails.imgUrl}}
+            source={{uri: `${imageBaseUrl}${movieDetails.poster_path}`}}
             style={styles.moviePoster}
         />
         <Text style={styles.movieTitle} numberOfLines={2}>{movieDetails.title}</Text>
-    </View>
+    </Pressable>
   )
 }
 

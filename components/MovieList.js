@@ -3,11 +3,13 @@ import React from 'react'
 import MovieCard from './MovieCard'
 import colors from '../constants/colors'
 
-const MovieData = [
+export const MovieData = [
     {
         id: 1,
         imgUrl: 'https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-        title: 'Spider-Man: Across the Spider-Verse'
+        title: 'Spider-Man: Across the Spider-Verse',
+        rating: 4.5,
+        tags: ['Action', ]
     },
     {
         id: 2,
@@ -56,18 +58,20 @@ const MovieData = [
     }
 ]
 
-const MovieList = ({ title }) => {
+const MovieList = ({ title, navigation, moviesList }) => {
   return (
     <View style={styles.container}>
         <View style={styles.titleContainer}>
             <Text style={styles.categoryTitle}>{title}</Text>
-            <Pressable>
-                <Text style={styles.moreBtn}>More</Text>
-            </Pressable>
+            {title === "Similar" ? null : (
+                <Pressable>
+                    <Text style={styles.moreBtn}>More</Text>
+                </Pressable>
+            )}
         </View>
         <FlatList 
-            data={MovieData}
-            renderItem={({item}) => <MovieCard movieDetails={{...item}} />}
+            data={moviesList}
+            renderItem={({item}) => <MovieCard movieDetails={{...item}} navigation={navigation} />}
             keyExtractor={item => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
