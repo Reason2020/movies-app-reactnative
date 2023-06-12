@@ -1,6 +1,6 @@
 import { StyleSheet, Text, Image, Dimensions, Pressable } from 'react-native'
 import React from 'react'
-import { height, width } from '../constants/otherconstants';
+import { fallbackMoviePoster, height, width } from '../constants/otherconstants';
 
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w300';
 
@@ -11,7 +11,7 @@ const MovieCard = ({ movieDetails, navigation }) => {
         itemId: movieDetails.id
     })}>
         <Image 
-            source={{uri: `${imageBaseUrl}${movieDetails.poster_path}`}}
+            source={{uri: movieDetails.poster_path !== null ? `${imageBaseUrl}${movieDetails.poster_path}` : fallbackMoviePoster}}
             style={styles.moviePoster}
         />
         <Text style={styles.movieTitle} numberOfLines={2}>{movieDetails.title}</Text>

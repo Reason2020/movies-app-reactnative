@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, Dimensions, Pressable } from 'react-native'
 import React from 'react'
-import { width } from '../constants/otherconstants';
+import { fallbackPersonImage, width } from '../constants/otherconstants';
 
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w185';
 
@@ -10,7 +10,7 @@ const CastCard = ({ castDetails, navigation }) => {
       itemId: castDetails.id
     })}>
         <Image
-            source={{uri: `${imageBaseUrl}${castDetails.profile_path}`}}
+            source={{uri: castDetails.profile_path !== null ? `${imageBaseUrl}${castDetails.profile_path}` : fallbackPersonImage}}
             style={styles.imageStyle}
         />
       <Text numberOfLines={2} style={styles.castTitle}>{castDetails.name}</Text>

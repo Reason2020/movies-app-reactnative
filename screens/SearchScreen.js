@@ -36,7 +36,7 @@ const SearchScreen = ({ navigation }) => {
       </View>
 
       {/* movies list */}
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
           <Text>({searchResult.length}) Results:</Text>
           <View style={styles.moviesListContainer}>
             {searchResult && searchResult.map((item, index) => {

@@ -1,7 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import MovieList from '../components/MovieList'
-import { height, width } from '../constants/otherconstants';
+import { fallbackMoviePoster, height, width } from '../constants/otherconstants';
 import { Entypo, AntDesign } from '@expo/vector-icons';
 import colors from '../constants/colors';
 import StarRating from '../components/StarRating';
@@ -58,7 +58,7 @@ const MovieDetailsScreen = ({ navigation, route }) => {
         {/* image container */}
         <View>
           <Image
-            source={{uri: `${imageBaseUrl}${movie.poster_path}`}}
+            source={{uri: movie.poster_path !== null ? `${imageBaseUrl}${movie.poster_path}` : fallbackMoviePoster}}
             style={styles.imageStyle}
           />
         </View>
