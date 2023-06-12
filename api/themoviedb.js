@@ -59,6 +59,6 @@ export const fetchCreditsDetails = (id) => {
 export const fetchMoviesByCredits = (id) => {
     return apiCall(moviesByCreditsEndpoint(id));
 }
-export const fetchMoviesBySearch = (movieName) => {
-    return apiCall(searchMoviesEndpoint, {query: `${movieName}`, include_adult: 'false'})
+export const fetchMovieBySearch = (movieName) => {
+    return apiCall(searchMoviesEndpoint, {query: `${movieName}`, include_adult: 'false', language: 'en-US', page: '1'});
 }

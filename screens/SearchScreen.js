@@ -1,55 +1,50 @@
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, TextInput, Pressable, Dimensions } from 'react-native'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { Entypo } from '@expo/vector-icons';
-import colors from '../constants/colors';
-import { fetchMoviesBySearch } from '../api/themoviedb';
 import MovieCard from '../components/MovieCard';
-
-const { width, height } = Dimensions.get('screen');
+import colors from '../constants/colors';
+import { fetchMovieBySearch } from '../api/themoviedb';
 
 const SearchScreen = ({ navigation }) => {
   const [ movieName, setMovieName ] = useState('');
-  const [ moviesList, setMoviesList ] = useState([]);
+  const [ searchResult, setSearchResult ] = useState([]);
 
-  // console.log(movieName);
   useEffect(() => {
     getMoviesBySearch();
   }, [movieName]);
 
-  //get the movies list
+  //getting movies
   const getMoviesBySearch = async () => {
-    const data = await fetchMoviesBySearch(movieName);
-    setMoviesList(data.results);
+    const data = await fetchMovieBySearch(movieName);
+    // console.log(data.results);
+    setSearchResult(data.results);
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{padding: 8}}>
       {/* search field container */}
       <View style={styles.searchFieldContainer}>
-        <Pressable onPress={() => navigation.pop()}>
-          <Entypo name='chevron-left' size={24} color={colors.black}/>
-        </Pressable>
-        <TextInput 
-          style={styles.inputField}
-          placeholder='Search movies...'
-          onChangeText={setMovieName}
-          value={movieName}
-        />
+          <Pressable onPress={() => navigation.pop()}>
+              <Entypo name='chevron-left' size={24} color={colors.black} />
+          </Pressable>
+          <TextInput
+              style={styles.inputField}
+              onChangeText={setMovieName}
+              value={movieName}
+              placeholder='Search Movies...'
+          />
       </View>
 
-      {/* movies list container */}
-      <ScrollView style={{padding: 5}}>
-        <Text>{moviesList.length} Results found</Text>
-        <View style={styles.moviesListContainer}>
-          {moviesList.map((item, index) => {
-            return (
-              <Pressable key={index}>
-                <MovieCard navigation={navigation} movieDetails={item} />
-              </Pressable>
-            )
-          })}
-        </View>
-        
+      {/* movies list */}
+      <ScrollView>
+          <Text>({searchResult.length}) Results:</Text>
+          <View style={styles.moviesListContainer}>
+            {searchResult && searchResult.map((item, index) => {
+              return (
+                <MovieCard movieDetails={item} navigation={navigation} key={index} />
+              )
+            })}
+          </View>
       </ScrollView>
     </SafeAreaView>
   )
@@ -60,16 +55,14 @@ export default SearchScreen
 const styles = StyleSheet.create({
   searchFieldContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    width: width * 0.9,
-    padding: 5
+    alignItems: 'center'
   },
   inputField: {
-    borderWidth: 1,
     borderColor: colors.orange,
-    borderRadius: 5,
-    padding: 4,
-    width: width * 0.87
+    borderWidth: 1,
+    borderRadius: 30,
+    padding: 8,
+    width: Dimensions.get('screen').width * 0.88
   },
   moviesListContainer: {
     flexDirection: 'row',
