@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, Image, Dimensions, Pressable } from 'react-native'
+import { StyleSheet, Text, Image, Dimensions, Pressable } from 'react-native'
 import React from 'react'
+import { height, width } from '../constants/otherconstants';
 
-const { width, height } = Dimensions.get('screen');
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w300';
 
 const MovieCard = ({ movieDetails, navigation }) => {

@@ -1,6 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import MovieList, { MovieData } from '../components/MovieList'
+import MovieList from '../components/MovieList'
+import { height, width } from '../constants/otherconstants';
 import { Entypo, AntDesign } from '@expo/vector-icons';
 import colors from '../constants/colors';
 import StarRating from '../components/StarRating';
@@ -8,25 +9,7 @@ import GenreCard from '../components/GenreCard';
 import CastList from '../components/CastList';
 import { fetchMovieCredits, fetchMovieDetails, fetchSimilarMovies } from '../api/themoviedb';
 
-const { width, height } = Dimensions.get('screen');
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
-
-const spiderManDetails = {
-  title: 'Spider-Man: Across the Spider-Verse',
-  genres: ['Action', "Adventure", 'Animation', 'Science Fiction'],
-  overview: "After reuniting with Gwen Stacy, Brooklyn’s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse’s very existence. But when the heroes clash on how to handle a new threat, Miles finds himself pitted against the other Spiders and must set out on his own to save those he loves most.",
-  cast: [
-    {gender: 2, name: 'Shameik Moore', profile_path: 'https://image.tmdb.org/t/p/w185/uJNaSTsfBOvtFWsPP23zNthknsB.jpg', id: 587506, index: 1},
-    {gender: 2, name: 'Shameik Moore', profile_path: 'https://image.tmdb.org/t/p/w185/uJNaSTsfBOvtFWsPP23zNthknsB.jpg', id: 587506, index: 2},
-    {gender: 2, name: 'Shameik Moore', profile_path: 'https://image.tmdb.org/t/p/w185/uJNaSTsfBOvtFWsPP23zNthknsB.jpg', id: 587506, index: 3},
-    {gender: 2, name: 'Shameik Moore', profile_path: 'https://image.tmdb.org/t/p/w185/uJNaSTsfBOvtFWsPP23zNthknsB.jpg', id: 587506, index: 4},
-    {gender: 2, name: 'Shameik Moore', profile_path: 'https://image.tmdb.org/t/p/w185/uJNaSTsfBOvtFWsPP23zNthknsB.jpg', id: 587506, index: 5},
-    {gender: 2, name: 'Shameik Moore', profile_path: 'https://image.tmdb.org/t/p/w185/uJNaSTsfBOvtFWsPP23zNthknsB.jpg', id: 587506, index: 6},
-  ],
-  similar: [...MovieData],
-  imgUrl: 'https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-  rating: 4.5
-}
 
 const MovieDetailsScreen = ({ navigation, route }) => {
   // const [ movieId, setMovieId ] = useState('');

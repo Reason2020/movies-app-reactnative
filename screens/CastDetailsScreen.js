@@ -4,9 +4,9 @@ import { Entypo } from '@expo/vector-icons';
 import colors from '../constants/colors';
 import { fetchCreditsDetails, fetchMoviesByCredits } from '../api/themoviedb';
 import MovieList from '../components/MovieList';
+import { height } from '../constants/otherconstants';
 
 //constants
-const { width, height } = Dimensions.get('screen');
 const imageBaseUrl = 'https://image.tmdb.org/t/p/w185';
 const currentDate = new Date();
 const currentYear = currentDate.getFullYear();

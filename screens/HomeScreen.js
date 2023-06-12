@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View, Pressable, ScrollView, Dimensions, SafeAreaView, StatusBar, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, Pressable, ScrollView, SafeAreaView, StatusBar, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import colors from '../constants/colors';
 import MovieList from '../components/MovieList';
 import { fetchPopularMovies, fetchTopRatedMovies, fetchUpcomingMovies } from '../api/themoviedb';
-
-const {height, width} = Dimensions.get('screen');
+import { height, width } from '../constants/otherconstants';
 
 const HomeScreen = ({ navigation }) => {
     const [ popular, setPopular ] = useState([]);

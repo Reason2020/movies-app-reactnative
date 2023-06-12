@@ -1,4 +1,4 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import MovieCard from './MovieCard'
 import colors from '../constants/colors'
@@ -63,11 +63,6 @@ const MovieList = ({ title, navigation, moviesList }) => {
     <View style={styles.container}>
         <View style={styles.titleContainer}>
             <Text style={styles.categoryTitle}>{title}</Text>
-            {title === "Similar" ? null : (
-                <Pressable>
-                    <Text style={styles.moreBtn}>More</Text>
-                </Pressable>
-            )}
         </View>
         <FlatList 
             data={moviesList}
