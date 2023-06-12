@@ -3,71 +3,12 @@ import React from 'react'
 import MovieCard from './MovieCard'
 import colors from '../constants/colors'
 
-export const MovieData = [
-    {
-        id: 1,
-        imgUrl: 'https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-        title: 'Spider-Man: Across the Spider-Verse',
-        rating: 4.5,
-        tags: ['Action', ]
-    },
-    {
-        id: 2,
-        imgUrl: 'https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-        title: 'Spider-Man: Across the Spider-Verse'
-    },
-    {
-        id: 3,
-        imgUrl: 'https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-        title: 'Spider-Man: Across the Spider-Verse'
-    },
-    {
-        id: 4,
-        imgUrl: 'https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-        title: 'Spider-Man: Across the Spider-Verse'
-    },
-    {
-        id: 5,
-        imgUrl: 'https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-        title: 'Spider-Man: Across the Spider-Verse'
-    },
-    {
-        id: 6,
-        imgUrl: 'https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-        title: 'Spider-Man: Across the Spider-Verse'
-    },
-    {
-        id: 7,
-        imgUrl: 'https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-        title: 'Spider-Man: Across the Spider-Verse'
-    },
-    {
-        id: 8,
-        imgUrl: 'https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-        title: 'Spider-Man: Across the Spider-Verse'
-    },
-    {
-        id: 9,
-        imgUrl: 'https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-        title: 'Spider-Man: Across the Spider-Verse'
-    },
-    {
-        id: 10,
-        imgUrl: 'https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
-        title: 'Spider-Man: Across the Spider-Verse'
-    }
-]
-
 const MovieList = ({ title, navigation, moviesList }) => {
+    if (title === 'Similar') console.log('Similar', moviesList);
   return (
     <View style={styles.container}>
         <View style={styles.titleContainer}>
             <Text style={styles.categoryTitle}>{title}</Text>
-            {title === "Similar" ? null : (
-                <Pressable>
-                    <Text style={styles.moreBtn}>More</Text>
-                </Pressable>
-            )}
         </View>
         <FlatList 
             data={moviesList}

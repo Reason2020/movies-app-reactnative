@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import colors from '../constants/colors';
 import MovieList from '../components/MovieList';
-import { fetchPopularMovies, fetchTopRatedMovies, fetchUpcomingMovies } from '../api/themoviedb';
+import { fetchPopularMovies, fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies } from '../api/themoviedb';
+import TrendingMovies from '../components/TrendingMovies';
 
 const {height, width} = Dimensions.get('screen');
 
 const HomeScreen = ({ navigation }) => {
+    const [ trending, setTrending ] = useState([]);
     const [ popular, setPopular ] = useState([]);
     const [ upcoming, setUpcoming ] = useState([]);
     const [ topRated, setTopRated ] = useState([]);
@@ -15,12 +17,17 @@ const HomeScreen = ({ navigation }) => {
 
     //make an api call to retrieve the data
     useEffect(() => {
+        getTrendingMovies();
         getPopularMovies();
         getUpcomingMovies();
         getTopRatedMovies();
         setIsLoading(false);
     }, [])
 
+    const getTrendingMovies = async () => {
+        const data = await fetchTrendingMovies();
+        if (data && data.results) setTrending(data.results);
+    }
     const getPopularMovies = async () => {
         const data = await fetchPopularMovies();
         // console.log('got popular movies: ', data);
@@ -56,6 +63,10 @@ const HomeScreen = ({ navigation }) => {
                     <Text style={styles.title}>Movies</Text>
                     <View style={styles.separator}></View>
                 </View>
+
+                {/* trending movies carousel */}
+                <TrendingMovies navigation={navigation} movies={trending} />
+
                 {/* Popular Movies List */}
                 <MovieList title="Popular" navigation={navigation} moviesList={popular} />
 

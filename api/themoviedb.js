@@ -3,9 +3,11 @@ import axios from "axios";
 
 //endpoints
 const apiBaseUrl = 'https://api.themoviedb.org/3';
+const trendingMoviesEndpoint = `${apiBaseUrl}/trending/movie/week?api_key=${apiKey}`;
 const popularMoviesEndpoint = `${apiBaseUrl}/movie/popular?api_key=${apiKey}`;
 const topRatedMoviesEndpoint = `${apiBaseUrl}/movie/top_rated?api_key=${apiKey}`;
 const upcomingMoviesEndpoint = `${apiBaseUrl}/movie/upcoming?api_key=${apiKey}`;
+const searchMoviesEndpoint = `${apiBaseUrl}/search/movie?api_key=${apiKey}`;
 
 //dynamic endpoints
 const movieDetailsEndpoint = id => `${apiBaseUrl}/movie/${id}?api_key=${apiKey}`;
@@ -30,7 +32,9 @@ const apiCall = async (endpoint, params) => {
         return {}
     }
 }
-
+export const fetchTrendingMovies = () => {
+    return apiCall(trendingMoviesEndpoint);
+}
 export const fetchPopularMovies = () => {
     return apiCall(popularMoviesEndpoint);
 }
@@ -54,4 +58,7 @@ export const fetchCreditsDetails = (id) => {
 }
 export const fetchMoviesByCredits = (id) => {
     return apiCall(moviesByCreditsEndpoint(id));
+}
+export const fetchMoviesBySearch = (movieName) => {
+    return apiCall(searchMoviesEndpoint, {query: `${movieName}`, include_adult: 'false'})
 }
